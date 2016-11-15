@@ -47,3 +47,4 @@ http.createServer(app).listen(options.ports.http);
 console.log('\tStarted HTTP server (http://localhost:' + options.ports.http + ')');
 https.createServer(options.auth, app).listen(options.ports.https);
 console.log('\tStarted HTTPS server (https://localhost:' + options.ports.https + ')');
+console.log('');
