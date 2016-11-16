@@ -3,13 +3,20 @@ console.log("Loading global dependencies...");
 var http = require('http');
 var https = require('https');
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var mongoose = require('mongoose');
+var morgan = require('morgan');
 var app = express();
 //-------------------------------------------------------------
 console.log("Loading local dependencies...");
 var env = process.env.NODE_ENV || 'dev';
 console.log("\tEnvironment = " + env);
 var options = require('./config/config_' + env);
+var user = require('./api/user/user_model');
+//-------------------------------------------------------------
+console.log("Connecting to database...");
+mongoose.connect(options.db.host);
 //-------------------------------------------------------------
 console.log("Loading middle-ware...");
 console.log("\tServing static files from " + options.static_folder + " folder...")
@@ -18,6 +25,8 @@ console.log("\tLoading body parser...")
 app.use(bodyParser.json());
 console.log("\tLoading url encoder/decoder...")
 app.use(bodyParser.urlencoded({ extended: true }));
+console.log("\tLoading Morgan logger...")
+app.use(morgan('dev'));
 console.log("\tAdding error catch block to filter bad requests...")
 app.use(function(err, req, res, next)
 {
@@ -43,8 +52,6 @@ for(var i = 0; i < options.controllers.length; i++)
 }
 //-------------------------------------------------------------
 console.log('Starting sever(s)...');
-http.createServer(app).listen(options.ports.http);
-console.log('\tStarted HTTP server (http://localhost:' + options.ports.http + ')');
 https.createServer(options.auth, app).listen(options.ports.https);
 console.log('\tStarted HTTPS server (https://localhost:' + options.ports.https + ')');
 console.log('');
