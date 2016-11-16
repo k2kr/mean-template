@@ -1,7 +1,6 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var User = require('../user/user_model');
-var app = express();
 var router = express.Router();
 
 var env = process.env.NODE_ENV || 'dev';
