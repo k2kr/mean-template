@@ -6,28 +6,6 @@ var router = express.Router();
 var env = process.env.NODE_ENV || 'dev';
 var options = require('../../config/config_' + env);
 
-router.get('/setup', function(req, res){
-	var karthik = new User({
-		name: 'Karthik KR',
-		password: 'dummy',
-		roles: ['admin', 'user']
-	});
-	
-	karthik.save(function(err){
-		if (err)
-		{
-			return res.json({
-				success:false,
-				message:err.message
-			});
-		}
-		
-		res.json({
-			success: true,
-			message: 'User saved successfully'
-		});
-	});
-});
 router.use(function authenticate (req, res, next){
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
 	

@@ -28,6 +28,10 @@ config.controllers = [
 	{
 		url: '/task',
 		path: './api/task/task_controller'
+	},
+	{
+		url: '/test',
+		path: './api/test/test_controller'
 	}
 ]
 
