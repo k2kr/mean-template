@@ -3,6 +3,9 @@ var jwt = require('jsonwebtoken');
 var Task = require('./task_model');
 var router = express.Router();
 
+var env = process.env.NODE_ENV || 'dev';
+var options = require('../../config/config_' + env);
+
 router.use(function authenticate (req, res, next){
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
 	
