@@ -14,10 +14,18 @@ router.get('/setup', function(req, res){
 	});
 	
 	karthik.save(function(err){
-		if (err) throw err;
+		if (err)
+		{
+			return res.json({
+				success:false,
+				message:err.message
+			});
+		}
 		
-		console.log("User saved successfully");
-		res.json({success: true});
+		res.json({
+			success: true,
+			message: 'User saved successfully'
+		});
 	});
 });
 router.use(function authenticate (req, res, next){
