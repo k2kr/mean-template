@@ -19,6 +19,11 @@ console.log("Connecting to database...");
 mongoose.connect(options.db.host);
 //-------------------------------------------------------------
 console.log("Loading middle-ware...");
+console.log("\tLoading redirect...");
+app.use(function(req, res, next){
+	if (req.secure) next();
+	else res.redirect('https://' + req.hostname + ":" + options.ports.https + req.originalUrl);
+});
 console.log("\tServing static files from " + options.static_folder + " folder...")
 app.use(express.static(options.static_folder));
 console.log("\tLoading body parser...")
@@ -51,7 +56,8 @@ for(var i = 0; i < options.controllers.length; i++)
 	app.use(controller.url, require(controller.path));
 }
 //-------------------------------------------------------------
-console.log('Starting sever(s)...');
+console.log('Starting server(s)...');
 https.createServer(options.auth, app).listen(options.ports.https);
 console.log('\tStarted HTTPS server (https://localhost:' + options.ports.https + ')');
-console.log('');
+http.createServer(app).listen(options.ports.http);
+console.log("\tStarted HTTP server (http://localhost:" + options.ports.http + ")")
