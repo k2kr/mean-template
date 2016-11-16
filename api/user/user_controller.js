@@ -37,11 +37,11 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
 	if (req.body.name)
 	{
-		res.send("Register user with username " + req.body.username);
+		res.send("Register user with username " + req.body.name);
 	}
 	else if(req.query.name)
 	{
-		res.send("Register user with username " + req.query.username);
+		res.send("Register user with username " + req.query.name);
 	}
 	else
 	{
