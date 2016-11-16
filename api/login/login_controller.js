@@ -11,32 +11,51 @@ router.get('/', function (req, res){
 	res.send('Show a login page here');
 });
 router.post('/', function(req, res){
-	User.findOne({
-		name: req.body.name
-	}, function(err, user){
+	if (!req.body.name)
+	{
+		return res.json({
+			success:false,
+			message: 'Authentication failed. Username not provided.'
+		});
+	}
+	
+	if (!req.body.password)
+	{
+		return res.json({
+			success:false,
+			message: 'Authentication failed. Password not provided.'
+		});
+	}
+	
+	User.findOne({name: req.body.name}, function(err, user){
 		if(err) throw err;
 		
 		if(!user){
-			res.json({success:false, message: 'Authentication failed. Username not found.'});
-		} else if (user)
+			return res.json({
+				success:false, 
+				message: 'Authentication failed. Username not found.', 
+				name: req.body.name
+			});
+		}  
+		
+		if(user.password != req.body.password)
 		{
-			if(user.password != req.body.password)
-			{
-				res.json({success: false, message: 'Authentication failed. Incorrect password.'});
-			}
-			else
-			{
-				var token = jwt.sign(user, options.auth.secret,{
-					expiresIn: '1d'
-				});
-				
-				res.json({
-					success: true,
-					message: 'Enjoy your token!',
-					token: token
-				});
-			}
+			return res.json({
+				success: false, 
+				message: 'Authentication failed. Incorrect password.',
+				name: req.body.name
+			});
 		}
+		
+		var token = jwt.sign(user, options.auth.secret,{
+			expiresIn: '30d'
+		});
+		
+		return res.json({
+			success: true,
+			message: 'Enjoy your token!',
+			token: token
+		});
 	});
 });
 
