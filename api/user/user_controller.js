@@ -30,7 +30,7 @@ router.use(function authenticate (req, res, next){
 	}
 });
 router.get('/', function(req, res){
-	User.find({name: req.decoded._doc.name}, function(err, users){
+	User.findOne({name: req.decoded._doc.name}, function(err, users){
 		res.json(users);
 	});
 });
