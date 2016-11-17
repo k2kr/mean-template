@@ -43,11 +43,6 @@ app.use(function(err, req, res, next)
 });
 
 // Build endpoints
-console.log('');
-console.log('/ -> /login');
-app.get('/', function (req, res){
-	res.redirect('/login');
-});
 for(var i = 0; i < options.controllers.length; i++)
 {
 	var controller = options.controllers[i];
