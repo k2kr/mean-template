@@ -34,9 +34,9 @@ router.get('/', function(req, res){
 	{
 		res.send('Return task based on id ' + req.query.id);
 	}
-	else if(req.query.username)
+	else if(req.decoded.name)
 	{
-		res.send('Return all tasks belonging to ' + req.query.username);
+		res.send('Return all tasks belonging to ' + req.decoded.name);
 	}
 	else
 	{
@@ -44,13 +44,9 @@ router.get('/', function(req, res){
 	}
 });
 router.post('/', function(req, res){
-	if (req.body.username)
+	if (req.decoded.name)
 	{
-		res.send("Register new task for user " + req.body.username);
-	}
-	else if(req.query.username)
-	{
-		res.send("Register new task for user " + req.query.username);
+		res.send("Register new task for user " + req.decoded.namee);
 	}
 	else
 	{

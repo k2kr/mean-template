@@ -30,23 +30,9 @@ router.use(function authenticate (req, res, next){
 	}
 });
 router.get('/', function(req, res){
-	User.findOne({name: req.decoded._doc.name}, function(err, users){
+	User.findOne({name: req.decoded.name}, function(err, users){
 		res.json(users);
 	});
-});
-router.post('/', function(req, res){
-	if (req.body.name)
-	{
-		res.send("Register user with username " + req.body.name);
-	}
-	else if(req.query.name)
-	{
-		res.send("Register user with username " + req.query.name);
-	}
-	else
-	{
-		res.status(400).send("Bad request. Need a username.");
-	}
 });
 
 module.exports = router;

@@ -22,17 +22,13 @@ config.controllers = [
 		path: './api/login/login_controller'
 	},
 	{
-		url: '/user',
+		url: '/api/user',
 		path: './api/user/user_controller'
 	},
 	{
-		url: '/task',
+		url: '/api/task',
 		path: './api/task/task_controller'
 	},
-	{
-		url: '/test',
-		path: './api/test/test_controller'
-	}
 ]
 
 config.static_folder = 'public'

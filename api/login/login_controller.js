@@ -1,6 +1,7 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var User = require('../user/user_model');
+var ldap = require('ldapjs');
 var router = express.Router();
 
 var env = process.env.NODE_ENV || 'dev';
@@ -26,30 +27,36 @@ router.post('/', function(req, res){
 		});
 	}
 	
-	User.findOne({name: req.body.name}, function(err, user){
-		if(err) throw err;
+	var bind_dn = 'uid=' + req.body.name + ', ou=people, dc=qualcomm, dc=com'
+	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
+	var client = ldap.createClient({
+		url: 'ldaps://qed-ldap.qualcomm.com:636'
+	});
+	
+	client.bind(bind_dn, req.body.password, function(err){
+		client.unbind();
 		
-		if(!user){
-			return res.json({
-				success:false, 
-				message: 'Authentication failed. Username not found.', 
-				name: req.body.name
-			});
-		}  
-		
-		if(user.password != req.body.password)
+		if (err)
 		{
 			return res.json({
-				success: false, 
-				message: 'Authentication failed. Incorrect password.',
+				success:false, 
+				message: 'Invalid credentials', 
 				name: req.body.name
 			});
 		}
-		
-		var token = jwt.sign(user, options.auth.secret,{
-			expiresIn: '30d'
+
+		var newUser = new User({
+			name: req.body.name,
+			roles: 'user'
 		});
+			
+		newUser.save();
 		
+		var token = jwt.sign({name: req.body.name}, options.auth.secret,{
+			expiresIn: '30 days'
+		});
+	
 		return res.json({
 			success: true,
 			message: 'Enjoy your token!',
