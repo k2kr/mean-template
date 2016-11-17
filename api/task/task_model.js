@@ -7,6 +7,8 @@ var task_model = mongoose.model('Task', new Schema({
 	status: {type: String, enum:['planning', 'active', 'completed']},
 	createdOn: Date,
 	completedOn: Date,
+	requestedCompletion: Date,
+	projectedCompletion: Date,
 	parent: {type:Schema.ObjectId, ref:'Task'},
 	children: [{type:Schema.ObjectId, ref:'Task'}]
 }));
