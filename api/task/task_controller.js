@@ -46,7 +46,7 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
 	if (req.decoded.name)
 	{
-		res.send("Register new task for user " + req.decoded.namee);
+		res.send("Register new task for user " + req.decoded.name);
 	}
 	else
 	{
