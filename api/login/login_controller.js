@@ -50,17 +50,38 @@ router.post('/', function(req, res){
 			name: req.body.name,
 			roles: 'user'
 		});
-			
-		newUser.save();
 		
-		var token = jwt.sign({name: req.body.name}, options.auth.secret,{
+		User.findOne({name: req.body.name, roles: 'user'}, function(err, result){
+			var tokenUser;
+			if (!result)
+			{
+				var newUser = new User({
+					name: req.body.name,
+					roles: 'user'
+				});
+				
+				newUser.save();
+				tokenUser = newUser;
+			}
+			else 
+			{
+				if(result.roles.indexOf('user') < 0)
+				{
+					result.roles.push('user');
+					result.save();
+				}
+				tokenUser = {name: result.name, roles: result.roles};
+			}
+			
+			var token = jwt.sign(tokenUser, options.auth.secret,{
 			expiresIn: '30 days'
-		});
-	
-		return res.json({
-			success: true,
-			message: 'Enjoy your token!',
-			token: token
+			});
+		
+			return res.json({
+				success: true,
+				message: 'Enjoy your token!',
+				token: token
+			});
 		});
 	});
 });
