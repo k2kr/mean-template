@@ -74,7 +74,7 @@ router.post('/', function(req, res){
 			}
 			
 			var token = jwt.sign(tokenUser, options.auth.secret,{
-			expiresIn: '30 days'
+				expiresIn: '30 days'
 			});
 		
 			return res.json({
