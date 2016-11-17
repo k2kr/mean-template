@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var task_model = mongoose.model('Task', new Schema({
 	name: String,
 	description: String,
-	status: {type: String, enum:['planning', 'active', 'completed']},
+	status: {type: String, enum:['planning', 'active', 'completed', 'cancelled']},
 	createdOn: Date,
 	completedOn: Date,
 	requestedCompletion: Date,
