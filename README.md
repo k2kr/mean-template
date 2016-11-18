@@ -55,6 +55,7 @@ Make sure you have the following:
 2. Install [nodejs](https://nodejs.org)
   * Node is the platform that your web server backend will execute on.
 3. Install [mongo](https://www.mongodb.com/)
+  * Mongo is the database used to store information and drive your service or application.
   * Add the mongo bin to your system path after you run the installer.
   * By default, mongo stores data in C:\data\db. If this folder doesn't exist on your machine, create it.
   
