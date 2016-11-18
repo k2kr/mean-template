@@ -4,6 +4,7 @@ Provides a template website for qualcomm web applications to be built using the 
 ## What is a MEAN stack?
 
 Every web service or web application had the following components:
+
 1. A client front end (usually javascript + jquery)
 2. A web server backend (like ASP.NET, Linux, Python, etc...)
 3. A database (Apache, Oracle, MySQL, etc...)
@@ -13,10 +14,10 @@ There are many choices for each of these components. Collectively, they are call
 
 Here is what the MEAN stack looks like:
 
-**M** - Mongo DB
-**E** - Express JS
-**A** - Angular JS
-**N** - Node JS
+* **M** - Mongo DB
+* **E** - Express JS
+* **A** - Angular JS
+* **N** - Node JS
 
 The MEAN stack is useful in that it unifies all parts of web development into a single language - javascript.
 It's also very easy to learn and very flexible, with many libraries and packages available to build on.
