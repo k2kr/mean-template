@@ -28,7 +28,9 @@ router.post('/', function(req, res){
 	}
 	
 	var bind_dn = 'uid=' + req.body.name + ', ou=people, dc=qualcomm, dc=com'
-	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+	// Need this because ldap can use self-signed SSL certs. 
+	// Need to prevent authentication errors.
+	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'; 
 
 	var client = ldap.createClient({
 		url: 'ldaps://qed-ldap.qualcomm.com:636'

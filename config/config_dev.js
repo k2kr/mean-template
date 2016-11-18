@@ -16,20 +16,24 @@ config.db = {
 	host: 'mongodb://localhost/dev'
 }
 
-config.controllers = [
-	{
-		url: '/login',
-		path: './api/login/login_controller'
-	},
-	{
-		url: '/api/user',
-		path: './api/user/user_controller'
-	},
-	{
-		url: '/api/task',
-		path: './api/task/task_controller'
-	},
-]
+config.controllers = {
+	open:[
+		{
+			url: '/login',
+			path: './api/login/login_controller'
+		}
+	],
+	secured:[
+		{
+			url: '/api/user',
+			path: './api/user/user_controller'
+		},
+		{
+			url: '/api/task',
+			path: './api/task/task_controller'
+		}
+	]
+}
 
 config.static_folder = 'public'
 

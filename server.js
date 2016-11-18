@@ -6,6 +6,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var token_auth = require('./auth/token-auth');
 
 // Initialize environment and db
 var app = express();
@@ -43,10 +44,17 @@ app.use(function(err, req, res, next)
 });
 
 // Build endpoints
-for(var i = 0; i < options.controllers.length; i++)
+for(var i = 0; i < options.controllers.open.length; i++)
 {
-	var controller = options.controllers[i];
-	console.log(controller.url + " -> " + controller.path);
+	var controller = options.controllers.open[i];
+	console.log("Open: " + controller.url + " -> " + controller.path);
+	app.use(controller.url, require(controller.path));
+}
+app.use(token_auth);
+for(var i = 0; i < options.controllers.secured.length; i++)
+{
+	var controller = options.controllers.secured[i];
+	console.log("Secured: " + controller.url + " -> " + controller.path);
 	app.use(controller.url, require(controller.path));
 }
 
