@@ -13,7 +13,7 @@ config.auth = {
 }
 
 config.db = {
-	host: 'mongodb://localhost/mysite'
+	host: 'mongodb://localhost/dev'
 }
 
 config.controllers = [

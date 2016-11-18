@@ -61,7 +61,7 @@ router.post('/', function(req, res){
 				});
 				
 				newUser.save();
-				tokenUser = newUser;
+				tokenUser = {name: newUser.name, roles: newUser.roles};
 			}
 			else 
 			{
