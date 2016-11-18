@@ -40,7 +40,7 @@ a minimal code base with all the guts open so that you can tinker it as you wish
 
 ## Installation/Setup
 
-Getting started if fairly straightforward and shouldn't take more than a few minutes.
+Getting started is fairly straightforward and shouldn't take more than a few minutes.
 
 ### Before you Install:
 Make sure you have the following:
