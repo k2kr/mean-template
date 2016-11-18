@@ -32,7 +32,7 @@ If you are interested in any of these, using this template will save you lots of
 3. LDAP authentication. All your users can just use their Qualpass credentials to log in.
 4. Simple routing for web services. Uses Express JS to define RESTful API routes.
 
-Please note that any apps/services built from this template should be for qualcomm internal use only. Definitely talk to [ITCS](http://go/itcs)) if you want to publish this to production, and consult [OSRG](http://go/osrg) regarding external release processes.
+Please note that any apps/services built from this template should be for qualcomm internal use only. Definitely talk to [ITCS](http://go/itcs) if you want to publish this to production, and consult [OSRG](http://go/osrg) regarding external release processes.
 
 ## Why not use another web framework?
 
