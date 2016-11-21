@@ -8,16 +8,16 @@ module.exports = function(req, res, next){
 	
 	if (token) {
 		jwt.verify(token, options.auth.secret, function(err, decoded) {      
-		if (err) {
-			return res.json({ 
-				success: false,
-				message: 'Failed to authenticate token.' 
-			});    
-		} else {
-			// if everything is good, save to request for use in other routes
-			req.token = decoded;    
-			next();
-		}
+			if (err) {
+				return res.json({ 
+					success: false,
+					message: 'Failed to authenticate token.' 
+				});    
+			} else {
+				// if everything is good, save to request for use in other routes
+				req.token = decoded;    
+				next();
+			}
 		});
 	} else {
 		return res.status(403).json({
