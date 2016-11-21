@@ -3,11 +3,12 @@ var Schema = mongoose.Schema;
 var Task = require('../task/task_model');
 
 var user_model = mongoose.model('User', new Schema({
-	name: {
+	username: {
 		type: String, 
 		unique: true,
 		required: true
 	},
+	password: String,
 	roles: [{
 		type: String, 
 		enum:['admin', 'manager', 'user', 'service', 'test']

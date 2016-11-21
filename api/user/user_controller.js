@@ -7,7 +7,8 @@ var env = process.env.NODE_ENV || 'dev';
 var options = require('../../config/config_' + env);
 
 router.get('/', function(req, res){
-	User.findOne({name: req.token.name}, function(err, users){
+	console.log(req.token.username);
+	User.findOne({username: req.token.username}, function(err, users){
 		res.json(users);
 	});
 });

@@ -12,6 +12,13 @@ config.auth = {
 	secret: 'myfirstsite_secret',
 }
 
+config.ldap = {
+	url: 'ldaps://qed-ldap.qualcomm.com:636',
+	bind_dn: function(username){
+		return 'uid=' + username + ', ou=people, dc=qualcomm, dc=com';
+	}
+}
+
 config.db = {
 	host: 'mongodb://localhost/dev'
 }
@@ -20,7 +27,11 @@ config.controllers = {
 	open:[
 		{
 			url: '/login',
-			path: './api/login/login_controller'
+			path: './api/login_controller'
+		},
+		{
+			url: '/register',
+			path: './api/register_controller'
 		}
 	],
 	secured:[
