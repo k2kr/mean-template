@@ -1,5 +1,5 @@
-# q-mean-template
-Provides a template website for qualcomm web applications to be built using the MEAN stack.
+# mean-template
+Provides a template website for web applications to be built using the MEAN stack.
 
 ## What is a MEAN stack?
 
@@ -29,7 +29,7 @@ If you are interested in any of these, using this template will save you lots of
 
 1. Auto HTTPS redirect. This ensures all your web apps and services are secure end-to-end.
 2. Token based user authentication. All session and authentication information are managed by JSON web tokens.
-3. LDAP authentication. All your users can just use their Qualpass credentials to log in.
+3. LDAP authentication. All your users can just use their employee credentials to log in.
 4. Simple routing for web services. Uses Express JS to define RESTful API routes.
 
 ## Why not use another web framework?
