@@ -19,11 +19,17 @@ function loginCntrl(user, auth){
 	self.login = function() {
 		user.login(self.username, self.password)
 		  .then(handleRequest, handleRequest);
+		
+		self.username = '';
+		self.password = '';
 	}
 	
 	self.register = function() {
 		user.register(self.username, self.password)
-		  .then(handleRequest, handleRequest);;
+		  .then(handleRequest, handleRequest);
+		  
+		self.username = '';
+		self.password = '';
 	}
 	
 	self.logout = function() {
